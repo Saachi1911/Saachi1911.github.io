@@ -97,7 +97,7 @@ body{font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Arial;color
 
     <div class="intro" id="intro">
       <h1 id="introTitle"></h1>
-      <p id="introSub">My cutest moon, my forever bacha 🌸</p>
+      <p id="introSub">My cutest moon, my forever bacha, my only sister!! 🌸</p>
       <button class="heartBtn" id="heartBtn" aria-label="Start gift">💞</button>
       <small style="color:#ffd8ea;margin-top:12px">Open quietly at 12:00 AM ✨</small>
     </div>
@@ -122,7 +122,8 @@ body{font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Arial;color
     <div id="secretHeart">💗</div>
     <div id="secretMsg">
       <div class="flowers">🌸🌼🌷🌹</div>
-      <p>You’ll never be alone, Saachi 💗 — Mr Bean is always here for you 🌸</p>
+      <p><p>You’re the sister I prayed for… for 8 years straight 🌙<br>God didn’t give me luck — He gave me you 💗🧿</p>
+</p>
     </div>
 
     <audio id="bgAudio" loop preload="auto">
@@ -179,7 +180,7 @@ heartBtn.addEventListener('click',()=>{
   setTimeout(()=>{
     intro.style.display='none';
     const pre=document.createElement('div');
-    pre.textContent="Every wish I ever made looks like you, Saachi 🌙";
+    pre.textContent="For years, I asked God for a sister… and then He sent me you, Saachi 🌙";
     Object.assign(pre.style,{position:'fixed',inset:0,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'28px',color:'#fff',zIndex:'20',background:'rgba(0,0,0,0.4)',backdropFilter:'blur(6px)',opacity:'0',transition:'opacity 1s'});
     document.body.appendChild(pre);
     setTimeout(()=>pre.style.opacity=1,300);
@@ -193,11 +194,11 @@ heartBtn.addEventListener('click',()=>{
 /* Slideshow */
 const slides=[...document.querySelectorAll('.slide')];
 const messages=[
-  "Hey Bacha — this one’s for you 🌙",
+  "Bacha — this one’s for you 🌙",
   "You’re my calm, even when the world is loud 🌸",
-  "My Himawari — your smile feels like sunlight after rain 😊",
+  "My Himawari, my little sister — your smile feels like sunlight after rain 😊",
   "You never ask for much, but you give everything softly 💕",
-  "You’ll always be my favourite person, my peace 💖"
+  "You’ll always be my favourite person, my comfort space and my only sister 💖"
 ];
 const msg=document.getElementById('msgbox'), end=document.getElementById('endNote');
 let idx=0;
@@ -244,3 +245,4 @@ heart.addEventListener('click',()=>{
 </script>
 </body>
 </html>
+
