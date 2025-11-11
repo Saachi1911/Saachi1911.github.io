@@ -5,114 +5,92 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>For My Moon 🌙</title>
 <style>
-  /* ---------- base ---------- */
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%;background:#03102a;overflow:hidden}
   body{font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Arial;color:#fff}
 
-  /* ---------- stage (full-bleed landscape) ---------- */
+  /* ---------- stage ---------- */
   .stage{
     position:fixed;inset:0;
     display:flex;align-items:flex-start;justify-content:center;
-    background: radial-gradient(circle at 50% 35%, #03102a 0%, #000010 75%);
+    background:radial-gradient(circle at 50% 35%, #03102a 0%, #000010 75%);
   }
 
-  .moon-bg{position:fixed;inset:0;background-image:url('moon.jpg');background-size:cover;background-position:center top;opacity:0.06;filter:blur(6px) brightness(.88);z-index:0;pointer-events:none}
-
-  /* --- Realistic Glowing Moon + Reflection --- */
-  .moon {
-    position: absolute;
-    top: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 180px;
-    height: 180px;
-    background: radial-gradient(circle at 30% 30%, #fff 70%, #dcdcdc 90%, #aaa 100%);
-    border-radius: 50%;
-    box-shadow: 0 0 60px 20px rgba(255, 255, 255, 0.4);
-    animation: moonGlow 6s ease-in-out infinite;
+  /* ---------- Moon ---------- */
+  .moon{
+    position:absolute;top:5%;left:50%;transform:translateX(-50%);
+    width:340px;height:340px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, #fff 68%, #e0e0e0 88%, #999 100%);
+    box-shadow:0 0 80px 20px rgba(255,255,255,0.45);
+    animation:moonPulse 6s ease-in-out infinite alternate;
+    z-index:3;
   }
   .moon::after{
-    content:"";
-    position:absolute;
-    bottom:-80px;left:50%;
-    transform:translateX(-50%);
-    width:300px;height:60px;
-    border-radius:50%;
-    background:radial-gradient(ellipse at center,rgba(255,255,255,0.18) 0%,rgba(255,255,255,0) 70%);
-    filter:blur(8px);
+    content:"";position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);
+    width:280px;height:60px;border-radius:50%;
+    background:radial-gradient(ellipse at center,rgba(255,255,255,0.2) 0%,rgba(255,255,255,0) 70%);
+    filter:blur(6px);
   }
-  @keyframes moonGlow {
-    0%, 100% { box-shadow: 0 0 50px 15px rgba(255,255,255,0.4); filter: brightness(1); }
-    50% { box-shadow: 0 0 80px 25px rgba(255,255,255,0.8); filter: brightness(1.15); }
+  @keyframes moonPulse{
+    0%{box-shadow:0 0 60px 20px rgba(255,255,255,0.4);}
+    100%{box-shadow:0 0 100px 30px rgba(255,255,255,0.7);}
   }
 
-  .topCaption{position:absolute;top:28%;left:50%;transform:translateX(-50%);z-index:4;color:#e7f2ff;opacity:0.95;font-size:16px;letter-spacing:0.2px}
-
-  /* ---------- stars & shooting stars ---------- */
+  /* ---------- Stars ---------- */
   .stars{position:fixed;inset:0;z-index:1;pointer-events:none}
-  .star{position:absolute;background:#fff;border-radius:50%;opacity:0.9;filter:blur(.3px)}
-  .star.small{opacity:.6}
+  .star{position:absolute;background:#fff;border-radius:50%;opacity:0.8;filter:blur(.3px)}
   .shooting{position:fixed;inset:0;z-index:2;pointer-events:none}
-  .shootingStar{position:absolute;height:3px;border-radius:3px;background:linear-gradient(90deg,rgba(255,255,255,1),rgba(255,255,255,0));filter:blur(.8px);opacity:0.95}
+  .spark{position:absolute;width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,0.9);filter:blur(2px);opacity:0.9;}
 
-  /* ---------- floating emojis ---------- */
+  /* ---------- Floating Emojis ---------- */
   .sprites{position:fixed;inset:0;z-index:6;pointer-events:none}
   .sprite{position:absolute;font-size:22px;opacity:0.9;animation:floatUp linear infinite}
   @keyframes floatUp{0%{transform:translateY(0) scale(.96);opacity:1}100%{transform:translateY(-720px) scale(1.03);opacity:0}}
 
-  /* ---------- intro overlay (typing title + heart) ---------- */
-  .intro{position:fixed;inset:0;z-index:8;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:22px;background:linear-gradient(180deg, rgba(0,0,0,0.22), rgba(0,0,0,0.34));backdrop-filter:blur(4px)}
-  .intro h1{font-size:54px;font-weight:700;line-height:1.02;margin-bottom:12px;letter-spacing:0.4px;max-width:92%;word-break:break-word}
+  /* ---------- Intro ---------- */
+  .intro{position:fixed;inset:0;z-index:8;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:22px;background:linear-gradient(180deg,rgba(0,0,0,0.22),rgba(0,0,0,0.34));backdrop-filter:blur(4px)}
+  .intro h1{font-size:54px;font-weight:700;line-height:1.02;margin-bottom:12px}
   .intro p{font-size:18px;color:#dfeeff;margin-bottom:22px}
-  .heartBtn{width:120px;height:120px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:46px;background:radial-gradient(circle,#ffbcd6,#ff98c9);color:#25050a;border:0;cursor:pointer;box-shadow:0 18px 60px rgba(255,140,170,0.12);opacity:0;transform:scale(.88);transition:opacity .55s ease, transform .25s cubic-bezier(.2,.9,.3,1)}
+  .heartBtn{width:120px;height:120px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:46px;background:radial-gradient(circle,#ffbcd6,#ff98c9);color:#25050a;border:0;cursor:pointer;box-shadow:0 0 40px rgba(255,120,160,0.4);opacity:0;transform:scale(.88);transition:opacity .5s,transform .25s}
   .heartBtn.show{opacity:1;transform:scale(1)}
-  @keyframes heartPulse { 0%{transform:scale(0.98)}50%{transform:scale(1.06)}100%{transform:scale(0.98)} }
-  .heartBtn.breathe{animation:heartPulse 1400ms ease-in-out infinite}
+  @keyframes heartGlow{0%,100%{transform:scale(1);box-shadow:0 0 40px rgba(255,120,160,0.3);}50%{transform:scale(1.1);box-shadow:0 0 80px rgba(255,180,200,0.6);}}
+  .heartBtn.breathe{animation:heartGlow 1.6s ease-in-out infinite}
 
-  /* ---------- main slideshow ---------- */
+  /* ---------- Main Slideshow ---------- */
   .main{position:fixed;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;pointer-events:none}
-  .frame{width:100%;height:72vh;max-width:1400px;margin-top:9vh;position:relative;overflow:visible;pointer-events:none}
+  .frame{width:100%;height:72vh;max-width:1400px;margin-top:9vh;position:relative;}
   .slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 1.1s ease}
   .slide.show{opacity:1}
-  .slide img{max-width:92%;max-height:82vh;border-radius:14px;object-fit:contain;background:#000;box-shadow:0 36px 100px rgba(0,0,0,0.6)}
+  .slide img{max-width:90%;max-height:80vh;border-radius:14px;object-fit:contain;box-shadow:0 36px 100px rgba(0,0,0,0.6)}
+  .zoomIn{animation:kenburns 5000ms ease-in-out forwards;}
+  @keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.06)}}
 
-  .zoomIn { animation: kenburns 5000ms ease-in-out forwards; }
-  @keyframes kenburns { from { transform: scale(1) } to { transform: scale(1.06) } }
-
-  .msgbox{position:absolute;left:50%;transform:translateX(-50%);bottom:6%;z-index:7;min-width:60%;max-width:88%;background:rgba(1,6,18,0.52);padding:14px 18px;border-radius:12px;backdrop-filter:blur(6px);text-align:center;font-size:20px;color:#f8fbff;opacity:0;transition:opacity .8s ease, transform .8s ease}
+  .msgbox{position:absolute;left:50%;transform:translateX(-50%);bottom:6%;z-index:7;min-width:60%;max-width:88%;background:rgba(1,6,18,0.52);padding:14px 18px;border-radius:12px;backdrop-filter:blur(6px);text-align:center;font-size:20px;color:#f8fbff;opacity:0;transition:opacity .8s ease,transform .8s ease}
   .msgbox.show{opacity:1;transform:translateX(-50%) translateY(-6px)}
 
-  .endNote{position:fixed;inset:0;z-index:9;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:30px;background:linear-gradient(180deg, rgba(0,0,0,0.22), rgba(0,0,0,0.5));opacity:0;pointer-events:none;transition:opacity 1s ease}
+  /* ---------- Final Note ---------- */
+  .endNote{position:fixed;inset:0;z-index:9;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:30px;background:linear-gradient(180deg,rgba(0,0,0,0.22),rgba(0,0,0,0.5));opacity:0;pointer-events:none;transition:opacity 1s ease}
   .endNote.show{opacity:1;pointer-events:auto}
   .endNote h2{font-size:34px;margin-bottom:12px}
   .endNote p{font-size:20px;color:#eaf0ff;line-height:1.6;max-width:820px}
 
-  /* secret popup */
-  #secretHeart{position:fixed;bottom:30px;right:40px;cursor:pointer;font-size:26px;z-index:30;transition:transform .3s;}
-  #secretHeart:hover{transform:scale(1.3);}
+  /* ---------- Easter Egg ---------- */
+  #secretHeart{position:fixed;bottom:40px;right:50px;cursor:pointer;font-size:40px;z-index:30;opacity:0;transition:opacity 1s,transform .3s;animation:heartPulse 2s ease-in-out infinite;}
+  @keyframes heartPulse{0%,100%{transform:scale(1);filter:drop-shadow(0 0 8px rgba(255,150,180,0.6));}50%{transform:scale(1.2);filter:drop-shadow(0 0 20px rgba(255,200,220,0.8));}}
+  #secretHeart.show{opacity:1;}
+
   #secretMsg{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:rgba(0,0,0,0.55);backdrop-filter:blur(6px);opacity:0;pointer-events:none;z-index:40;transition:opacity 1s ease;}
   #secretMsg.show{opacity:1;pointer-events:auto;}
-  #secretMsg p{font-size:22px;color:#fff;margin-top:14px;max-width:80%;animation:revealText 2s ease forwards;}
-  .flowers{font-size:42px;animation:bloom 1s ease forwards;}
+  #secretMsg p{font-size:24px;color:#fff;margin-top:18px;max-width:80%;animation:revealText 2s ease forwards;}
+  .flowers{font-size:44px;animation:bloom 1.2s ease forwards;}
   @keyframes bloom{from{transform:scale(0);opacity:0;}to{transform:scale(1);opacity:1;}}
   @keyframes revealText{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
 
-  @media (max-width:900px){
-    .intro h1{font-size:32px}
-    .heartBtn{width:92px;height:92px;font-size:36px}
-    .slide img{max-width:96%}
-    .msgbox{font-size:16px;bottom:4%}
-    .moon{width:240px;height:240px}
-    .topCaption{top:22%;font-size:14px}
-  }
 </style>
 </head>
 <body>
-  <div class="stage" id="stage">
-    <div class="moon-bg"></div>
+  <div class="stage">
     <div class="moon"></div>
-    <div class="topCaption">To my Moon 🌙 — from your Mr Bean 💌</div>
     <div class="stars" id="stars"></div>
     <div class="shooting" id="shooting"></div>
     <div class="sprites" id="sprites"></div>
@@ -120,17 +98,17 @@
     <div class="intro" id="intro">
       <h1 id="introTitle"></h1>
       <p id="introSub">My cutest moon, my forever bacha</p>
-      <button class="heartBtn" id="heartBtn">💞</button>
+      <button class="heartBtn" id="heartBtn" aria-label="Start gift">💞</button>
       <small style="color:#cfe8ff;margin-top:12px">Open quietly at 12:00 AM ✨</small>
     </div>
 
-    <div class="main" id="main" aria-hidden="true">
-      <div class="frame" id="frame">
-        <div class="slide"><img src="IMG-20251110-WA0047.jpg" alt="photo1"></div>
-        <div class="slide"><img src="IMG-20251110-WA0048.jpg" alt="photo2"></div>
-        <div class="slide"><img src="IMG-20251110-WA0049.jpg" alt="photo3"></div>
-        <div class="slide"><img src="IMG-20251110-WA0050.jpg" alt="photo4"></div>
-        <div class="slide"><img src="IMG-20251110-WA0051.jpg" alt="photo5"></div>
+    <div class="main" id="main">
+      <div class="frame">
+        <div class="slide"><img src="IMG-20251110-WA0047.jpg"></div>
+        <div class="slide"><img src="IMG-20251110-WA0048.jpg"></div>
+        <div class="slide"><img src="IMG-20251110-WA0049.jpg"></div>
+        <div class="slide"><img src="IMG-20251110-WA0050.jpg"></div>
+        <div class="slide"><img src="IMG-20251110-WA0051.jpg"></div>
       </div>
       <div class="msgbox" id="msgbox"></div>
     </div>
@@ -140,50 +118,127 @@
       <p id="finalNote"></p>
     </div>
 
-    <audio id="bgAudio" loop preload="auto">
-      <source src="music.mp3" type="audio/mpeg">
-    </audio>
-
+    <!-- Easter Egg -->
     <div id="secretHeart">💗</div>
     <div id="secretMsg">
       <div class="flowers">🌸🌼🌷🌹</div>
-      <p>You’re the wish I stopped wishing for once I found you 💞</p>
+      <p>You were the wish I stopped wishing for… because once I found you, I needed nothing else 💫🌸</p>
     </div>
+
+    <audio id="bgAudio" loop preload="auto">
+      <source src="music.mp3" type="audio/mpeg">
+    </audio>
   </div>
 
 <script>
-/* stars */
-const starsEl=document.getElementById('stars');
-for(let i=0;i<140;i++){const s=document.createElement('div');s.className='star'+(Math.random()>0.78?' small':'');const size=(Math.random()*1.6+0.6);s.style.width=s.style.height=size+'px';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.opacity=(0.25+Math.random()*0.9).toFixed(2);starsEl.appendChild(s);}
-setInterval(()=>{for(const st of starsEl.children){st.style.opacity=(0.3+Math.random()*0.9).toFixed(2)}},1800);
-
-/* shooting stars */
+/* Stars + Twinkle + Shooting */
+const stars=document.getElementById('stars');
+for(let i=0;i<150;i++){
+  const s=document.createElement('div');
+  s.className='star';
+  const size=(Math.random()*1.8)+0.5;
+  s.style.width=s.style.height=size+'px';
+  s.style.left=Math.random()*100+'%';
+  s.style.top=Math.random()*100+'%';
+  s.style.opacity=(0.3+Math.random()*0.8).toFixed(2);
+  stars.appendChild(s);
+}
+setInterval(()=>[...stars.children].forEach(star=>star.style.opacity=(0.3+Math.random()*0.8).toFixed(2)),1500);
 const shooting=document.getElementById('shooting');
-function createShooting(){const el=document.createElement('div');el.className='shootingStar';el.style.top=Math.random()*window.innerHeight+'px';el.style.left=Math.random()*window.innerWidth+'px';el.style.width=(100+Math.random()*300)+'px';const angle=Math.random()*90-45;el.style.transform=`rotate(${angle}deg)`;shooting.appendChild(el);const dx=(Math.random()-0.5)*1600;const dy=(Math.random()-0.5)*800;el.animate([{transform:`translate(0,0) rotate(${angle}deg)`,opacity:1},{transform:`translate(${dx}px,${dy}px) rotate(${angle}deg)`,opacity:0}],{duration:2800+Math.random()*800,easing:'ease-out'});setTimeout(()=>el.remove(),3500);setTimeout(createShooting,6000+Math.random()*3000);}setTimeout(createShooting,2000);
+function spark(){
+  const sp=document.createElement('div');sp.className='spark';
+  sp.style.left=Math.random()*100+'%';sp.style.top=Math.random()*50+'%';
+  shooting.appendChild(sp);
+  sp.animate([{transform:'translate(0,0)',opacity:1},{transform:'translate(-600px,400px)',opacity:0}],{duration:2200,easing:'ease-out'});
+  setTimeout(()=>sp.remove(),2400);
+  setTimeout(spark,4000+Math.random()*3000);
+} spark();
 
-/* emojis */
-const sprites=document.getElementById('sprites');const icons=['♥️','🥰','💖','🩷','🫂'];for(let i=0;i<16;i++){const sp=document.createElement('div');sp.className='sprite';sp.style.left=(5+Math.random()*88)+'%';sp.style.bottom=(-40-Math.random()*220)+'px';sp.style.fontSize=(14+Math.random()*36)+'px';sp.style.animationDuration=(16+Math.random()*32)+'s';sp.style.animationDelay=(Math.random()*8)+'s';sp.textContent=icons[Math.floor(Math.random()*icons.length)];sprites.appendChild(sp);}
+/* Emojis */
+const sprites=document.getElementById('sprites');
+['♥️','🥰','💖','🩷','🫂'].forEach(()=>{});
+for(let i=0;i<14;i++){
+  const sp=document.createElement('div');
+  sp.className='sprite';sp.style.left=(5+Math.random()*88)+'%';
+  sp.style.bottom=(-40-Math.random()*220)+'px';
+  sp.style.fontSize=(14+Math.random()*36)+'px';
+  sp.style.animationDuration=(16+Math.random()*30)+'s';
+  sp.textContent=['♥️','🥰','💖','🩷','🫂'][Math.floor(Math.random()*5)];
+  sprites.appendChild(sp);
+}
 
-/* intro typing */
-const introTitleText="Happy Birthday My Moon… My Himawari ❤️💕🥰";
-const introTitle=document.getElementById('introTitle');
-const heartBtn=document.getElementById('heartBtn');
-let ti=0;function typeIntro(){if(ti<introTitleText.length){introTitle.textContent+=introTitleText.charAt(ti++);setTimeout(typeIntro,100);}else{setTimeout(()=>{heartBtn.classList.add('show');heartBtn.classList.add('breathe');},100);}}typeIntro();
+/* Typing Intro */
+const introTitle=document.getElementById('introTitle'), heartBtn=document.getElementById('heartBtn');
+const introText="Happy Birthday My Moon… My Himawari ❤️💕🥰";
+let i=0;function type(){if(i<introText.length){introTitle.textContent+=introText.charAt(i++);setTimeout(type,90);}else{setTimeout(()=>{heartBtn.classList.add('show','breathe');},300);}} type();
 
-/* heart click */
-const intro=document.getElementById('intro');const main=document.getElementById('main');const bgAudio=document.getElementById('bgAudio');const msgbox=document.getElementById('msgbox');const endNote=document.getElementById('endNote');
-heartBtn.addEventListener('click',()=>{try{bgAudio.currentTime=0;bgAudio.volume=0.95;bgAudio.play();}catch(e){}heartBtn.classList.remove('breathe');intro.style.opacity=0;setTimeout(()=>{intro.style.display='none';const preQuote=document.createElement('div');preQuote.textContent="Every wish I ever made looks like you, Saachi 🌙";preQuote.style.cssText="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;font-size:28px;color:#f8faff;text-align:center;z-index:20;background:rgba(0,0,0,0.4);backdrop-filter:blur(6px);opacity:0;transition:opacity 1s ease";document.body.appendChild(preQuote);setTimeout(()=>preQuote.style.opacity=1,300);setTimeout(()=>{preQuote.style.opacity=0;setTimeout(()=>{preQuote.remove();startSlideshow();},1200);},4000);},700);});
+/* Heart click to start */
+const intro=document.getElementById('intro'), main=document.getElementById('main'), bgAudio=document.getElementById('bgAudio');
+heartBtn.addEventListener('click',()=>{
+  try{bgAudio.currentTime=0;bgAudio.volume=0.95;bgAudio.play();}catch(e){}
+  intro.style.opacity=0;
+  setTimeout(()=>{
+    intro.style.display='none';
+    const pre=document.createElement('div');
+    pre.textContent="Every wish I ever made looks like you, Saachi 🌙";
+    Object.assign(pre.style,{position:'fixed',inset:0,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'28px',color:'#fff',zIndex:'20',background:'rgba(0,0,0,0.4)',backdropFilter:'blur(6px)',opacity:'0',transition:'opacity 1s'});
+    document.body.appendChild(pre);
+    setTimeout(()=>pre.style.opacity=1,300);
+    setTimeout(()=>{
+      pre.style.opacity=0;
+      setTimeout(()=>{pre.remove();startShow();},1200);
+    },4000);
+  },800);
+});
 
-/* slideshow */
-const slides=Array.from(document.querySelectorAll('.slide'));
-const messages=["Hey Bacha — this one’s for you 🌙","You’re my calm, even when the world is loud 🥹","My Himawari — your smile feels like sunlight after rain 🥰😊","You never ask for much, but you give everything softly 💕","You’ll always be my favourite person, my peace 💖\nThis smile... it’s home 🩷"];
-let cur=0;const showDuration=5000;
-function startSlideshow(){showSlide(0);}
-function showSlide(i){slides.forEach((s,idx)=>s.classList.toggle('show',idx===i));msgbox.classList.remove('show');setTimeout(()=>{msgbox.textContent=messages[i]||'';msgbox.classList.add('show');},220);setTimeout(()=>{if(i<slides.length-1)showSlide(i+1);else{setTimeout(()=>{msgbox.classList.remove('show');endNote.classList.add('show');const finalText="You are my peace, my warmth, my favourite person.\nYou’ll always be my Himawari — the one who made my world brighter.\n\n— Mr Bean 💫";const finalEl=document.getElementById('finalNote');let ft=0;function typeFinal(){if(ft<finalText.length){finalEl.innerHTML+=finalText[ft]==='\n' ? '<br>' : finalText[ft];ft++;setTimeout(typeFinal,80);}}typeFinal();},1000);}},showDuration);}
+/* Slideshow */
+const slides=[...document.querySelectorAll('.slide')];
+const messages=[
+  "Hey Bacha — this one’s for you 🌙",
+  "You’re my calm, even when the world is loud 🥹",
+  "My Himawari — your smile feels like sunlight after rain 🥰😊",
+  "You never ask for much, but you give everything softly 💕",
+  "You’ll always be my favourite person, my peace 💖\nThis smile... it’s home 🩷"
+];
+const msg=document.getElementById('msgbox'), end=document.getElementById('endNote');
+let idx=0;
+function startShow(){showSlide(0);}
+function showSlide(i){
+  slides.forEach((s,j)=>s.classList.toggle('show',i===j));
+  const img=slides[i].querySelector('img');img.classList.remove('zoomIn');void img.offsetWidth;img.classList.add('zoomIn');
+  msg.classList.remove('show');
+  setTimeout(()=>{msg.textContent=messages[i];msg.classList.add('show');},200);
+  setTimeout(()=>{
+    if(i<slides.length-1)showSlide(i+1);
+    else{
+      msg.classList.remove('show');
+      end.classList.add('show');
+      typeFinal();
+      setTimeout(()=>document.getElementById('secretHeart').classList.add('show'),3000);
+    }
+  },5000);
+}
 
-/* secret heart popup */
-const secretHeart=document.getElementById('secretHeart');const secretMsg=document.getElementById('secretMsg');
-secretHeart.addEventListener('click',()=>{secretMsg.classList.add('show');setTimeout(()=>secretMsg.classList.remove('show'),7000);});
+/* Typed Final */
+function typeFinal(){
+  const text="You are my peace, my warmth, my favourite person.\nYou’ll always be my Himawari — the one who made my world brighter.\n\n— Mr Bean 💫";
+  const out=document.getElementById('finalNote');let k=0;
+  (function loop(){if(k<text.length){out.innerHTML+=text[k]==='\n'?"<br>":text[k];k++;setTimeout(loop,80);}})();
+}
+
+/* Easter Egg */
+const heart=document.getElementById('secretHeart'), box=document.getElementById('secretMsg');
+heart.addEventListener('click',()=>{
+  box.classList.add('show');
+  for(let i=0;i<10;i++){
+    const fl=document.createElement('div');
+    fl.textContent=['🌸','🌼','💞','🩷','💫'][Math.floor(Math.random()*5)];
+    Object.assign(fl.style,{position:'fixed',left:Math.random()*100+'%',bottom:'0',fontSize:(20+Math.random()*20)+'px',animation:'floatUp 8s linear'});
+    document.body.appendChild(fl);
+    setTimeout(()=>fl.remove(),8000);
+  }
+  setTimeout(()=>box.classList.remove('show'),7000);
+});
 </script>
 </body>
 </html>
