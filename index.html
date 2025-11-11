@@ -173,7 +173,22 @@ for(let i=0;i<14;i++){
 /* Typing Intro */
 const introTitle=document.getElementById('introTitle'), heartBtn=document.getElementById('heartBtn');
 const introText="Happy Birthday My Moon… My Himawari 🌸💗";
-let i=0;function type(){if(i<introText.length){introTitle.textContent+=introText.charAt(i++);setTimeout(type,90);}else{setTimeout(()=>{heartBtn.classList.add('show','breathe');},300);}} type();
+let i=0;function type(){if(i<introText.length){introTitle.textContent+=introText.charAt(i++);setTimeout(type,90);}else {
+  // Fade in subtext after typing ends
+  const introSub = document.getElementById('introSub');
+  const introFrom = document.querySelector('.intro p:nth-of-type(2)');
+  introSub.style.opacity = 0;
+  introFrom.style.opacity = 0;
+  introSub.style.transition = 'opacity 1s ease';
+  introFrom.style.transition = 'opacity 1s ease';
+
+  setTimeout(() => { introSub.style.opacity = 1; }, 600);
+  setTimeout(() => { introFrom.style.opacity = 1; }, 1500);
+
+  // Show heart after everything fades
+  setTimeout(() => { heartBtn.classList.add('show','breathe'); }, 2600);
+}
+}} type();
 
 /* Heart click to start */
 const intro=document.getElementById('intro'), main=document.getElementById('main'), bgAudio=document.getElementById('bgAudio');
@@ -248,6 +263,7 @@ heart.addEventListener('click',()=>{
 </script>
 </body>
 </html>
+
 
 
 
