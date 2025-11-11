@@ -107,6 +107,26 @@
     .moon{width:240px;height:240px}
     .topCaption{top:22%;font-size:14px}
   }
+  #secretHeart{
+  position:fixed;bottom:30px;right:40px;cursor:pointer;
+  font-size:26px;z-index:30;transition:transform .3s;
+}
+#secretHeart:hover{transform:scale(1.3);}
+#secretMsg{
+  position:fixed;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  background:rgba(0,0,0,0.55);backdrop-filter:blur(6px);
+  opacity:0;pointer-events:none;z-index:40;transition:opacity 1s ease;
+}
+#secretMsg.show{opacity:1;pointer-events:auto;}
+#secretMsg p{
+  font-size:22px;color:#fff;margin-top:14px;max-width:80%;
+  animation:revealText 2s ease forwards;
+}
+.flowers{font-size:42px;animation:bloom 1s ease forwards;}
+@keyframes bloom{from{transform:scale(0);opacity:0;}to{transform:scale(1);opacity:1;}}
+@keyframes revealText{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+
 </style>
 </head>
 <body>
@@ -143,7 +163,8 @@
     <!-- End note -->
     <div class="endNote" id="endNote">
       <h2>This is only for you, Saachi!! ❤️💕🥰🌙</h2>
-      <p id="finalNote">You are my peace, my warmth, my favourite person. You’ll always be my Himawari — the one who made my world brighter. <br><br> — Mr Bean 💫</p>
+      <p id="finalNote"></p>
+
     </div>
 
     <!-- background music (local placeholder) -->
@@ -266,7 +287,24 @@ heartBtn.addEventListener('click', ()=> {
   setTimeout(()=> { heartBtn.style.transform = ''; }, 300);
   intro.style.transition = 'opacity .7s ease';
   intro.style.opacity = 0;
-  setTimeout(()=> { intro.style.display='none'; startSlideshow(); }, 700);
+  setTimeout(()=> {
+  intro.style.display='none';
+  // show pre-quote before slideshow
+  const preQuote=document.createElement('div');
+  preQuote.textContent="Every wish I ever made looks like you, Saachi 🌙";
+  preQuote.style.cssText=`
+    position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+    font-size:28px;color:#f8faff;text-align:center;z-index:20;
+    background:rgba(0,0,0,0.4);backdrop-filter:blur(6px);
+    opacity:0;transition:opacity 1s ease`;
+  document.body.appendChild(preQuote);
+  setTimeout(()=>preQuote.style.opacity=1,300);
+  setTimeout(()=>{
+    preQuote.style.opacity=0;
+    setTimeout(()=>{preQuote.remove();startSlideshow();},1200);
+  },4000);
+},700);
+
 });
 
 /* ---------------- SLIDESHOW (auto, 5s each + zoom) ---------------- */
@@ -276,7 +314,8 @@ const messages = [
   "You’re my calm, even when the world is loud 🥹",
   "My Himawari — your smile feels like sunlight after rain 🥰😊",
   "You never ask for much, but you give everything softly 💕",
-  "You’ll always be my favourite person, my peace 💖"
+  ""You’ll always be my favourite person, my peace 💖\nThis smile... it’s home 🩷"
+
 ];
 let cur = 0;
 const showDuration = 5000; // 5 seconds per slide
@@ -316,6 +355,19 @@ function showSlide(i){
       setTimeout(()=> {
         msgbox.classList.remove('show');
         endNote.classList.add('show');
+        // type the final letter slowly
+const finalText="You are my peace, my warmth, my favourite person.\nYou’ll always be my Himawari — the one who made my world brighter.\n\n— Mr Bean 💫";
+const finalEl=document.getElementById('finalNote');
+let ft=0;
+function typeFinal(){
+  if(ft<finalText.length){
+    finalEl.innerHTML+=finalText[ft]==='\n' ? '<br>' : finalText[ft];
+    ft++;
+    setTimeout(typeFinal,80);
+  }
+}
+typeFinal();
+
         // gentle music fade
         const fade = setInterval(()=> { if(bgAudio.volume > 0.12) bgAudio.volume = Math.max(0.12, bgAudio.volume - 0.04); else clearInterval(fade); }, 300);
       }, 1000);
@@ -341,6 +393,20 @@ window.addEventListener('resize', mobileScale);
 /* ---------------- ALLOW AUDIO ON FIRST TOUCH (fallback) ---------------- */
 document.body.addEventListener('click', ()=> { bgAudio.play().catch(()=>{}); }, {once:true});
 document.body.addEventListener('touchstart', ()=> { bgAudio.play().catch(()=>{}); }, {once:true});
+<div id="secretHeart">💗</div>
+<div id="secretMsg">
+  <div class="flowers">🌸🌼🌷🌹</div>
+  <p>You’re the wish I stopped wishing for once I found you 💞</p>
+</div>
+// secret heart popup
+const secretHeart=document.getElementById('secretHeart');
+const secretMsg=document.getElementById('secretMsg');
+secretHeart.addEventListener('click',()=>{
+  secretMsg.classList.add('show');
+  setTimeout(()=>secretMsg.classList.remove('show'),7000);
+});
+  
 </script>
 </body>
 </html>
+
