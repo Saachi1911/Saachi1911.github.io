@@ -88,6 +88,40 @@ body{font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Arial;color
 .flowers{font-size:44px;animation:bloom 1.2s ease forwards;}
 @keyframes bloom{from{transform:scale(0);opacity:0;}to{transform:scale(1);opacity:1;}}
 @keyframes revealText{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+.thankYou {
+  margin-top: 30px;
+  font-size: 26px;
+  font-style: italic;
+  font-weight: 600;
+  color: #ffd6e9;
+  text-shadow: 
+    0 0 10px rgba(255,180,220,0.8),
+    0 0 18px rgba(255,150,200,0.6);
+  line-height: 1.6;
+  animation: softGlow 3.5s ease-in-out infinite;
+}
+
+@keyframes softGlow {
+  0% {
+    text-shadow:
+      0 0 6px rgba(255,180,220,0.6),
+      0 0 14px rgba(255,150,200,0.5);
+    transform: scale(1);
+  }
+  50% {
+    text-shadow:
+      0 0 14px rgba(255,200,230,1),
+      0 0 30px rgba(255,180,220,0.9);
+    transform: scale(1.015);
+  }
+  100% {
+    text-shadow:
+      0 0 6px rgba(255,180,220,0.6),
+      0 0 14px rgba(255,150,200,0.5);
+    transform: scale(1);
+  }
+}
+
 </style>
 </head>
 <body>
@@ -118,9 +152,18 @@ body{font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Arial;color
     </div>
 
     <div class="endNote" id="endNote">
-      <h2>This is only for you, Saachi!! 💗🌸</h2>
-      <p id="finalNote"></p>
-    </div>
+  <h2>This is only for you, Saachi!! 💗🌸</h2>
+
+  <p id="finalNote"></p>
+
+  <p id="thankYou" class="thankYou">
+    THANK YOU FOR EVERYTHING YOU DID FOR ME UNKNOWINGLY.<br>
+    I CAN NEVER REPAY YOU FOR THE LOVE AND CARE YOU GAVE ME.<br>
+    AND MOSTLY… YOU COMPLETED MY DREAM OF HAVING A SISTER!!<br>
+    GOD BLESS YOU ALWAYS — STAY LIKE THIS FOREVER AND EVER!! 💗🙏
+  </p>
+</div>
+
 
     <!-- Easter Egg -->
     <div id="secretHeart">💗</div>
@@ -285,6 +328,7 @@ heart.addEventListener('click',()=>{
 </script>
 </body>
 </html>
+
 
 
 
