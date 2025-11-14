@@ -152,17 +152,19 @@ body{font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Arial;color
     </div>
 
     <div class="endNote" id="endNote">
-  <h2>This is only for you, Saachi!! 💗🌸</h2>
+  <h2 id="endTitle" style="opacity:0;">This is only for you, Saachi!! 💗🌸</h2> <!-- FIX -->
+
 
   <p id="finalNote"></p>
 
-  <p id="thankYou" class="thankYou">
-    THANK YOU FOR EVERYTHING YOU DID FOR ME UNKNOWINGLY.<br>
-    I CAN NEVER REPAY YOU FOR THE LOVE AND CARE YOU GAVE ME.<br>
-    AND MOSTLY… YOU COMPLETED MY DREAM OF HAVING A SISTER!!<br>
-    GOD BLESS YOU ALWAYS — STAY LIKE THIS FOREVER AND EVER!! 💗🙏
-  </p>
-</div>
+    <p id="thankYou" class="thankYou" style="opacity:0; transition: opacity 1.8s ease;">
+
+      THANK YOU FOR EVERYTHING YOU DID FOR ME UNKNOWINGLY.<br>
+      I CAN NEVER REPAY YOU FOR THE LOVE AND CARE YOU GAVE ME.<br>
+      AND MOSTLY… YOU COMPLETED MY DREAM OF HAVING A SISTER!!<br>
+      GOD BLESS YOU ALWAYS — STAY LIKE THIS FOREVER AND EVER!! 💗🙏
+    </p>
+  </div>
 
 
     <!-- Easter Egg -->
@@ -298,19 +300,36 @@ function showSlide(i){
       setTimeout(()=>{
         msg.classList.remove('show');
         end.classList.add('show');
-        typeFinal();
-        setTimeout(()=>document.getElementById('secretHeart').classList.add('show'),3000);
+document.getElementById('endTitle').style.opacity = 1; // FIX
+typeFinal();
+setTimeout(()=>document.getElementById('secretHeart').classList.add('show'),3000);
+
       },1000);
     }
   },5000);
 }
 
 /* Typed Final */
-function typeFinal(){
-  const text="You are my peace, my strength, my forever little one.\nYou’ll always be my Himawari — my sister, my pride, my smile.\n\n— Your Mr Bean 💞";
-  const out=document.getElementById('finalNote');let k=0;
-  (function loop(){if(k<text.length){out.innerHTML+=text[k]==='\n'?"<br>":text[k];k++;setTimeout(loop,80);}})();
+function typeFinal() {
+  const text = "You are my peace, my strength, my forever little one.\nYou’ll always be my Himawari — my sister, my pride, my smile.\n\n— Your Mr Bean 💞";
+  const out = document.getElementById('finalNote');
+  const thank = document.getElementById('thankYou');
+  let k = 0;
+
+  (function loop() {
+    if (k < text.length) {
+      out.innerHTML += text[k] === '\n' ? "<br>" : text[k];
+      k++;
+      setTimeout(loop, 80);
+    } else {
+      // SHOW THANK YOU NOTE AFTER TYPING ENDS
+      setTimeout(() => {
+        thank.style.opacity = 1;
+      }, 600); // slight delay for smoothness
+    }
+  })();
 }
+
 
 /* Easter Egg */
 const heart=document.getElementById('secretHeart'), box=document.getElementById('secretMsg');
@@ -328,7 +347,6 @@ heart.addEventListener('click',()=>{
 </script>
 </body>
 </html>
-
 
 
 
